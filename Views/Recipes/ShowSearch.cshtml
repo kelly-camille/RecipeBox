@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@using RecipeBox.Models;
+@model IEnumerable<RecipeBox.Models.Recipe>
+
+<form action="/Recipes/ShowSearch" method="post">
+  <label for="search">Search an Ingredient: </label>
+  <input name="search" id="search" type="text">
+  <button type="submit">Search</button>
+</form>
+
+@if (Model.Any())
+{
+  <ul>
+    @foreach (Recipe recipe in Model)
+    {
+      <li>@Html.ActionLink($"{recipe.RecipeName}", "Details", new { id = recipe.RecipeId })</li>
+    }
+  </ul>
+} 
+else
+{
+  <h3>No recipes have been added yet!</h3>
+}
+
+
+
+<p>@Html.ActionLink("Return Home", "Index", "Home")>
